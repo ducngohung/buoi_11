@@ -1,0 +1,8 @@
+name: Demo workflow
+on:
+  workflow_dispatch
+jobs:
+  khoi_dong:
+    runs-on: ubuntu-latest
+    steps:
+      - run: free -h
