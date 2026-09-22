@@ -1,8 +1,26 @@
-name: Demo workflow
+name: Deployment
+
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - main
 jobs:
-  khoi_dong:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: free -h
+      - name: Deploy Product
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /root/buoi_11
+            git pull origin main
+            docker-compose down
+            docker-compose build
+            docker-compose up -d
+            docker images -f "dangling=true" -q | xargs -r docker rmi
+            
+            
