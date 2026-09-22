@@ -6,7 +6,7 @@ WORKDIR /usr/share/nginx/html
 COPY . .
 
 # nhan biet port private, ung dung phia trong
-EXPOSE 3001:80
+EXPOSE 80
 
 # docker build -t img-html .
 # docker run -d -p 8080:80 --name cons-html img-html
